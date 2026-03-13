@@ -1,12 +1,16 @@
 import { io } from 'socket.io-client'
-import { socketio_port } from '../../../../sites/common_site_config.json'
 
 export function initSocket() {
 	let host = window.location.hostname
-	let siteName = window.site_name || host
-	let port = window.location.port ? `:${socketio_port}` : ''
-	let protocol = port ? 'http' : 'https'
-	let url = `${protocol}://${host}${port}/${siteName}`
+	let siteName =
+		window.site_name || host || import.meta.env.VITE_SITE_NAME || 'lms'
+
+	// Use env var for socketio_port, fallback to common default (9000)
+	let socketioPort = import.meta.env.VITE_SOCKETIO_PORT || 9000
+	let port = socketioPort && socketioPort !== 9000 ? `:${socketioPort}` : ''
+	let protocol = window.location.protocol === 'https:' ? 'wss' : 'ws'
+
+	let url = `${protocol}://${host}${port}/socket.io/${siteName}`
 
 	let socket = io(url, {
 		withCredentials: true,
