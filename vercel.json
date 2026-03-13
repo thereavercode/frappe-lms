@@ -1,6 +1,15 @@
 {
-	"framework": null,
-	"buildCommand": "cd frontend && yarn build && yarn copy-html-entry && yarn copy-colors-json",
-	"outputDirectory": "lms/public/frontend",
-	"installCommand": "yarn install"
+	"buildCommand": "cd frontend && yarn build --base=/assets/lms/frontend/ && yarn copy-html-entry && yarn copy-colors-json",
+	"outputDirectory": "lms/public",
+	"installCommand": "yarn install",
+	"routes": [
+		{
+			"src": "/assets/lms/frontend/(.*)",
+			"dest": "/frontend/$1"
+		},
+		{
+			"src": "/(.*)",
+			"dest": "/frontend/index.html"
+		}
+	]
 }
