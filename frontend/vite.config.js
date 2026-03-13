@@ -29,7 +29,7 @@ export default defineConfig(async ({ mode }) => {
 				workbox: {
 					cleanupOutdatedCaches: true,
 					maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
-					globDirectory: '/assets/lms/frontend',
+					globDirectory: 'dist', // Fixed: was '/assets/lms/frontend'
 					globPatterns: ['**/*.{js,ts,css,html,svg}'],
 					runtimeCaching: [
 						{
@@ -76,7 +76,7 @@ async function importFrappeUIPlugin(isDev) {
 		} catch (error) {
 			console.warn(
 				'Local frappe-ui not found, falling back to npm package:',
-				error.message
+				error.message,
 			)
 		}
 	}
