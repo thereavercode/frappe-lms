@@ -1,5 +1,5 @@
 {
 	"buildCommand": "cd frontend && yarn build",
-	"outputDirectory": "frontend/dist",
+	"outputDirectory": "lms/public/frontend",
 	"installCommand": "yarn install"
 }
